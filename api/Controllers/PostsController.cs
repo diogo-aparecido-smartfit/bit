@@ -2,6 +2,7 @@ using Data;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api.Controllers;
 
@@ -39,6 +40,7 @@ public class PostsController : ControllerBase
 
   // POST: /posts
   [HttpPost]
+  [Authorize]
   public async Task<ActionResult<Post>> PostPost(Post post)
   {
     _context.Posts.Add(post);
@@ -49,6 +51,7 @@ public class PostsController : ControllerBase
 
   // PUT: /posts/5
   [HttpPut("{id}")]
+  [Authorize]
   public async Task<IActionResult> PutPost(int id, Post post)
   {
     if (id != post.Id)
@@ -64,6 +67,7 @@ public class PostsController : ControllerBase
 
   // DELETE: /posts/5
   [HttpDelete("{id}")]
+  [Authorize]
   public async Task<IActionResult> DeletePost(int id)
   {
     var post = await _context.Posts.FindAsync(id);
@@ -81,6 +85,7 @@ public class PostsController : ControllerBase
 
   // endpoint fictício para testar a conexão com o db
   [HttpGet("test")]
+
   public string Test()
   {
     return "🚀 Hello World";
