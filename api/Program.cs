@@ -1,4 +1,3 @@
-using api.Middlewares;
 using Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,8 +24,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseMiddleware<AuthMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
