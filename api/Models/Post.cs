@@ -19,5 +19,8 @@ namespace Models
 
     [Column("author")]
     public required string Author { get; set; }
+
+    [Column("post_date")]
+    public DateTime PostDate { get; set; }
   }
 }
