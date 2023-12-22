@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 import CommandBar from "./components/CommandBar";
 import Footer from "./components/Footer";
 
@@ -18,11 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${workSans.className} h-screen`}>
-        <CommandBar>
-          {children}
-          <Footer />
-        </CommandBar>
+      <body className={workSans.className}>
+        <CommandBar>{children}</CommandBar>
+        <Footer />
       </body>
     </html>
   );

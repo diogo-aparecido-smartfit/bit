@@ -1,24 +1,10 @@
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { getPosts } from "../services/api";
+import { formatDate } from "../utils/formDate";
+import { calculateReadingTime } from "../utils/calculateReadingTime";
 
 export default async function PostsList() {
   const data = await getPosts();
-
-  const formatDate = (inputDate: string) => {
-    const date = new Date(inputDate);
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear();
-
-    return `${day}/${month}/${year}`;
-  };
-
-  function calculateReadingTime(body: string) {
-    const wordsPerMinute = 200;
-    const wordCount = body.split(/\s+/).length;
-    const readingTimeMinutes = Math.ceil(wordCount / wordsPerMinute);
-    return readingTimeMinutes;
-  }
 
   return data ? (
     <ul className="flex flex-col gap-14">
