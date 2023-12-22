@@ -74,9 +74,9 @@ export default function CommandBar({ children }: CommandBarProps) {
     <>
       <KBarProvider actions={actions}>
         <KBarPortal>
-          <KBarPositioner className="fixed flex items-start justify-center w-full inset-0 pt-[14vh] px-4 pb-4 bg-black/80">
-            <KBarAnimator className="bg-zinc-800 w-full max-w-[600px] rounded-lg overflow-hidden">
-              <KBarSearch className="py-3 px-4 text-base w-full outline-none border-none m-0 bg-zinc-900 placeholder:text-zinc-600" />
+          <KBarPositioner className="fixed flex items-start justify-center w-full inset-0 pt-[14vh] px-4 pb-4 bg-black/90">
+            <KBarAnimator className="bg-transparent backdrop-blur-md w-full max-w-[600px] rounded-lg overflow-hidden">
+              <KBarSearch className="py-3 px-4 text-base w-full outline-none border-none m-0 bg-elementsBg/60 placeholder:text-zinc-600" />
               <RenderResults />
             </KBarAnimator>
           </KBarPositioner>
@@ -96,13 +96,15 @@ function RenderResults() {
       items={results}
       onRender={({ item, active }) =>
         typeof item === "string" ? (
-          <div className="py-2 px-4 text-[10px] uppercase tracking-widest bg-zinc-900">
+          <div className="py-2 px-4 text-[10px] uppercase tracking-widest bg-elementsBg/60">
             {item}
           </div>
         ) : (
           <div
             className={`${
-              active ? "bg-zinc-800 text-white" : "bg-zinc-900 text-zinc-600"
+              active
+                ? "bg-zinc-800 text-white"
+                : "bg-elementsBg/60 text-zinc-600"
             } flex items-center gap-2 p-2 cursor-pointer`}
           >
             <span className="text-white text-xl">{item.icon}</span>

@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  color: #fdfdfc;
+  background-color: #161616;
+}
+
+::-moz-selection {
+  /* Code for Firefox */
+  color: #161616;
+  background: #ccccff;
+}
+
+::selection {
+  color: #161616;
+  background: #ccccff;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #1c1c1c #161616;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #161616;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  border: 8px none #ffffff;
+}
+
+.ql-editor {
+  > h1,
+  h2,
+  p,
+  strong,
+  em {
+    font-family: "Work Sans", sans-serif;
+  }
+
+  > p {
+    font-size: 16px;
+  }
+  color: #fdfdfc;
+}
+
+.quill > .ql-container > .ql-editor.ql-blank::before {
+  font-size: 16px;
+  font-family: "Work Sans", sans-serif;
+  font-style: normal;
+  color: #a3a3a3;
+}
+
+.post-card {
+  position: relative;
+}
+
+.limited-body {
+  max-height: 3em;
+  overflow: hidden;
+  position: relative;
+
+  > em,
+  strong,
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul,
+  li {
+    all: unset;
+  }
+}
+
+.gradient-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2.5em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), #161616);
+}

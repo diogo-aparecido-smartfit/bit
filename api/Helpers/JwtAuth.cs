@@ -22,7 +22,7 @@ namespace api.Helpers
           {
                     new Claim(ClaimTypes.Name, user.Username.ToString()),
           }),
-        Expires = DateTime.UtcNow.AddHours(10),
+        Expires = DateTime.UtcNow.AddDays(3),
 
         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
       };
