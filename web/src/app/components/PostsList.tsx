@@ -2,9 +2,17 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { getPosts } from "../services/api";
 import { formatDate } from "../utils/formDate";
 import { calculateReadingTime } from "../utils/calculateReadingTime";
+import Link from "next/link";
 
 export default async function PostsList() {
   const data = await getPosts();
+
+  function redirectToPost(id: string | number, title?: string) {
+    // const formattedUrl = title.toLocaleLowerCase().replace(/ /g, "-");
+    const postUrl = `post/${id}`;
+
+    return postUrl;
+  }
 
   return data ? (
     <ul className="flex flex-col gap-14">
@@ -24,19 +32,22 @@ export default async function PostsList() {
           <div className="text-base md:text-lg">
             <div
               id="body"
-              className="flex gap-1 limited-body"
+              className="flex gap-1 limited-body whitespace-nowrap"
               dangerouslySetInnerHTML={{
                 __html: post.body.split(" ").slice(0, 10).join("\n"),
               }}
             ></div>
             <div className="gradient-overlay"></div>
           </div>
-          <button className="flex items-center gap-2 text-white font-semibold hover:text-primaryColor transition-all duration-300 text-base md:text-lg group w-fit">
+          <Link
+            href={redirectToPost(post.id)}
+            className="flex items-center gap-2 text-white font-semibold hover:text-primaryColor transition-all duration-300 text-base md:text-lg group w-fit"
+          >
             Read More
             <span className="flex items-center group-hover:translate-x-1 transition-all duration-300">
               <MdKeyboardArrowRight />
             </span>
-          </button>
+          </Link>
         </article>
       ))}
     </ul>

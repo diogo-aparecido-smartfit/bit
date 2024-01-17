@@ -11,6 +11,12 @@ const apiUrl = process.env.API_URL || "";
 
 export async function authenticate(Username: string, Password: string) {
   try {
+    const token = cookies().get("jwt")?.value;
+
+    if (token) {
+      cookies().delete("jwt");
+    }
+
     const response = await fetch(`${apiUrl}/api/v1/auth`, {
       method: "POST",
       headers: {
@@ -32,6 +38,8 @@ export async function authenticate(Username: string, Password: string) {
         },
       };
     }
+
+    console.log(data);
 
     cookies().set({
       name: "jwt",

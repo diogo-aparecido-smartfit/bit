@@ -108,7 +108,7 @@ export default function Dashboard() {
                       {post.title}
                     </h1>
                   </div>
-                  <div className="flex flex-col items-center gap-2 z-10">
+                  <div className="flex flex-col items-center gap-2">
                     <Link
                       className="px-4 py-2 bg-elementsBg rounded-md border-[1px] border-zinc-800 font-medium hover:bg-primaryColor hover:border-elementsBg hover:text-elementsBg transition-all duration-500 ease-in-out flex flex-col items-center"
                       href={`/dashboard/posts/${post.id}`}
