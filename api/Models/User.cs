@@ -1,8 +1,18 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Models
 {
+  [Table("users")]
   public class User
   {
-    public required string Username { get; set; }
+    [Column("id")]
+    public int Id { get; set; }
+
+    [Column("name")]
+    public required string Name { get; set; }
+
+    [Column("password")]
     public required string Password { get; set; }
+
   }
 }

@@ -20,7 +20,7 @@ namespace api.Helpers
       {
         Subject = new ClaimsIdentity(new Claim[]
           {
-                    new Claim(ClaimTypes.Name, user.Username.ToString()),
+                    new Claim(ClaimTypes.Name, user.Name.ToString()),
           }),
         Expires = DateTime.UtcNow.AddDays(3),
 

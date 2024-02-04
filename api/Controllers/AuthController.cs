@@ -1,30 +1,33 @@
 using api.Helpers;
 using Models;
-using api.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
   [ApiController]
   public class AuthController : ControllerBase
   {
+    private readonly BlogContext _context;
+
+    public AuthController(BlogContext context)
+    {
+      _context = context;
+    }
+
     [HttpPost]
     [AllowAnonymous]
-    [Route("/api/v1/auth")]
-    public async Task<IActionResult> Auth([FromBody] User user)
+    [Route("/auth/signin")]
+    public async Task<IActionResult> AuthAsync([FromBody] User user)
     {
       try
       {
+        var userExists = await _context.Users.FirstOrDefaultAsync(u => u.Name == user.Name);
 
-        var userExists = new UserRepository().GetByUsername(user.Username);
-
-        if (userExists == null)
-          return BadRequest(new { Message = "Email e/ou senha está(ão) inválido(s)." });
-
-
-        if (userExists.Password != user.Password)
-          return BadRequest(new { Message = "Email e/ou senha está(ão) inválido(s)." });
+        if (userExists == null || !BCrypt.Net.BCrypt.Verify(user.Password, userExists.Password))
+          return Unauthorized("Invalid username or password.");
 
 
         var token = JwtAuth.GenerateToken(userExists);
@@ -32,7 +35,7 @@ namespace api.Controllers
         return Ok(new
         {
           Token = token,
-          Usuario = userExists
+          Username = userExists.Name
         });
 
       }

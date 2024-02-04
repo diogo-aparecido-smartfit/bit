@@ -10,7 +10,7 @@ namespace api.Controllers;
 [Route("[controller]")]
 public class PostsController : ControllerBase
 {
-  readonly BlogContext _context;
+  private readonly BlogContext _context;
 
   public PostsController(BlogContext context)
   {
