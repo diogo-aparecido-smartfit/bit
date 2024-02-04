@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.RegularExpressions;
 
 namespace api.Controllers;
 
@@ -43,6 +44,8 @@ public class PostsController : ControllerBase
   [Authorize]
   public async Task<ActionResult<Post>> PostPost(Post post)
   {
+    post.Slug = SlugUtility.GenerateSlug(post.Title);
+
     _context.Posts.Add(post);
     await _context.SaveChangesAsync();
 
