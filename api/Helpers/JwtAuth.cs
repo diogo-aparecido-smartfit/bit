@@ -4,6 +4,7 @@ using System.Security.Claims;
 using Models;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using Bit;
 
 namespace api.Helpers
 {
@@ -14,7 +15,7 @@ namespace api.Helpers
       var tokenHandler = new JwtSecurityTokenHandler();
 
       //chave secreta, geralmente se coloca em arquivo de configuração
-      var key = Encoding.ASCII.GetBytes("4WhSN7AXyhEO8EZxEgKnGL7lQxztJh8R");
+      var key = Encoding.ASCII.GetBytes(Settings.Secret);
 
       var tokenDescriptor = new SecurityTokenDescriptor
       {
