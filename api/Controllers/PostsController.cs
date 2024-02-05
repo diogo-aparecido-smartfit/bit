@@ -26,10 +26,11 @@ public class PostsController : ControllerBase
   }
 
   // GET: /posts/5
-  [HttpGet("{id}")]
-  public async Task<ActionResult<Post>> GetPost(int id)
+  [HttpGet("{slug}")]
+  public async Task<ActionResult<Post>> GetPost(string slug)
   {
-    var post = await _context.Posts.FindAsync(id);
+    // var post = await _context.Posts.FindAsync(slug);
+    var post = await _context.Posts.FirstOrDefaultAsync(post => post.Slug == slug);
 
     if (post == null)
     {
@@ -86,11 +87,4 @@ public class PostsController : ControllerBase
     return NoContent();
   }
 
-  // endpoint fictício para testar a conexão com o db
-  [HttpGet("test")]
-
-  public string Test()
-  {
-    return "🚀 Hello World";
-  }
 }

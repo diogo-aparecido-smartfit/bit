@@ -53,7 +53,7 @@ public class UsersController : ControllerBase
 
   // DELETE: /users/5
   [HttpDelete("{id}")]
-  // [Authorize]
+  [Authorize]
   public async Task<IActionResult> DeleteUser(int id)
   {
     var user = await _context.Users.FindAsync(id);
@@ -67,13 +67,5 @@ public class UsersController : ControllerBase
     await _context.SaveChangesAsync();
 
     return NoContent();
-  }
-
-  // endpoint fictício para testar a conexão com o db
-  [HttpGet("test")]
-
-  public string Test()
-  {
-    return "🚀 Hello World";
   }
 }
