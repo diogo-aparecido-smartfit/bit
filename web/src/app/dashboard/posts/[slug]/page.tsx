@@ -25,6 +25,7 @@ export default function Post() {
   const [post, setPost] = useState<Post>({
     id: Number(pid),
     title: "",
+    slug: "",
     body: "",
     author: "",
     postDate: "",

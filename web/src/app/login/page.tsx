@@ -30,7 +30,7 @@ export default function Login() {
       if (result === true) {
         return push("/dashboard");
       } else {
-        toast.error(`${result?.error?.message}`, {
+        toast.error(`Invalid username or password.`, {
           duration: 4000,
           position: "top-center",
           style: {

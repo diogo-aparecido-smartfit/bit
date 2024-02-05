@@ -109,6 +109,20 @@ export default function Posts() {
         });
       notify();
       push("/dashboard");
+    } else {
+      const notify = () =>
+        toast.error(`Error: ${result?.message}`, {
+          duration: 4000,
+          position: "top-center",
+          style: {
+            background: "#161616",
+            color: "#fdfdfc",
+          },
+        });
+      notify();
+      console.log(result?.status);
+      console.log(result?.message);
+      console.log(result?.error);
     }
     setIsLoading(false);
   };

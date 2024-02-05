@@ -63,6 +63,14 @@ body {
   color: #a3a3a3;
 }
 
+.post {
+  > strong,
+  span {
+    font-weight: bold;
+    font-size: 18px;
+  }
+}
+
 .post-card {
   position: relative;
 }

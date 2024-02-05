@@ -7,13 +7,6 @@ import Link from "next/link";
 export default async function PostsList() {
   const data = await getPosts();
 
-  function redirectToPost(id: string | number, title?: string) {
-    // const formattedUrl = title.toLocaleLowerCase().replace(/ /g, "-");
-    const postUrl = `post/${id}`;
-
-    return postUrl;
-  }
-
   return data ? (
     <ul className="flex flex-col gap-14">
       {data.map((post, i) => (
@@ -40,7 +33,10 @@ export default async function PostsList() {
             <div className="gradient-overlay"></div>
           </div>
           <Link
-            href={redirectToPost(post.id)}
+            href={{
+              pathname: "/post",
+              query: { read: post.slug },
+            }}
             className="flex items-center gap-2 text-white font-semibold hover:text-primaryColor transition-all duration-300 text-base md:text-lg group w-fit"
           >
             Read More

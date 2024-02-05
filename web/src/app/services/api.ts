@@ -17,8 +17,8 @@ export const getPosts = async (): Promise<Post[]> => {
   return posts;
 };
 
-export const getPostById = async (postId: string | string[]): Promise<Post> => {
-  const res = await fetch(`${apiUrl}/posts/${postId}`, { cache: "no-store" });
+export const getPostBySlug = async (postSlug: string | null): Promise<Post> => {
+  const res = await fetch(`${apiUrl}/posts/${postSlug}`, { cache: "no-store" });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -47,13 +47,15 @@ export async function createPost(
     };
   }
 
+  const slug = "";
+
   const requestOptions = {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title, body, tags, author, postDate }),
+    body: JSON.stringify({ title, body, slug, tags, author, postDate }),
   };
 
   try {

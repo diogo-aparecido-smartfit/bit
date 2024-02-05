@@ -17,13 +17,13 @@ export async function authenticate(Username: string, Password: string) {
       cookies().delete("jwt");
     }
 
-    const response = await fetch(`${apiUrl}/api/v1/auth`, {
+    const response = await fetch(`${apiUrl}/auth/signin`, {
       method: "POST",
       headers: {
         "Cache-Control": "no-cache",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ Username, Password }),
+      body: JSON.stringify({ Name: Username, Password }),
     });
 
     const data = await response.json();

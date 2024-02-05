@@ -5,6 +5,7 @@ import Tip from "./components/Tip";
 export interface Post {
   id: string | number;
   title: string;
+  slug: string;
   body: string;
   tags: string[];
   author: string;
