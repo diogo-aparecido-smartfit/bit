@@ -25,7 +25,7 @@ public class PostsController : ControllerBase
     return await _context.Posts.ToListAsync();
   }
 
-  // GET: /posts/5
+  // GET: /posts/[slug]
   [HttpGet("{slug}")]
   public async Task<ActionResult<Post>> GetPost(string slug)
   {
