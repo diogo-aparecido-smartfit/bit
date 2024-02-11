@@ -38,7 +38,7 @@ export default function CommandBar({ children }: CommandBarProps) {
       shortcut: ["c"],
       keywords: "login auth admin",
       section: "GENERAL",
-      perform: () => (window.location.pathname = "/login"),
+      perform: () => (window.location.pathname = "/signin"),
       icon: <IoLogInOutline />,
     },
     {
