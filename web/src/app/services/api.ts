@@ -5,8 +5,24 @@ import { cookies } from "next/headers";
 
 const apiUrl = process.env.API_URL || "";
 
-export const getPosts = async (): Promise<Post[]> => {
-  const res = await fetch(`${apiUrl}/posts`, { cache: "no-store" });
+export const getStaticPosts = async (): Promise<Post[]> => {
+  const res = await fetch(`${apiUrl}/posts`, {
+    next: { revalidate: 86400 },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  const posts = await res.json();
+
+  return posts;
+};
+
+export const getDynamicPosts = async (): Promise<Post[]> => {
+  const res = await fetch(`${apiUrl}/posts`, {
+    cache: "no-cache",
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -18,7 +34,9 @@ export const getPosts = async (): Promise<Post[]> => {
 };
 
 export const getPostBySlug = async (postSlug: string | null): Promise<Post> => {
-  const res = await fetch(`${apiUrl}/posts/${postSlug}`, { cache: "no-store" });
+  const res = await fetch(`${apiUrl}/posts/${postSlug}`, {
+    next: { revalidate: 86400 },
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -134,6 +152,7 @@ export async function deletePost(id: number | string) {
 export async function editPost(
   id: number,
   title: string,
+  slug: string,
   body: string,
   tags: string[],
   author: string,
@@ -160,7 +179,7 @@ export async function editPost(
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id, title, body, tags, author, postDate }),
+    body: JSON.stringify({ id, title, slug, body, tags, author, postDate }),
   };
 
   try {
@@ -179,6 +198,7 @@ export async function editPost(
       return {
         error: {
           status: response.status,
+          message: response.statusText,
         },
       };
     }
