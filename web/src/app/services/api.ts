@@ -84,7 +84,6 @@ export async function createPost(
     }
 
     const data = await response.json();
-    console.log("Post created successfully:", data);
     return {
       sucess: true,
       status: 204,
@@ -130,7 +129,6 @@ export async function deletePost(id: number | string) {
       };
     }
 
-    console.log("Post successfully deleted!");
     return {
       sucess: {
         status: 204,
@@ -186,7 +184,6 @@ export async function editPost(
     const response = await fetch(`${apiUrl}/posts/${id}`, requestOptions);
 
     if (response.ok) {
-      console.log("Post updated successfully!");
       return {
         sucess: {
           status: response.status,

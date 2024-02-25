@@ -1,11 +1,11 @@
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { getPosts } from "../services/api";
+import { getStaticPosts } from "../services/api";
 import { formatDate } from "../utils/formDate";
 import { calculateReadingTime } from "../utils/calculateReadingTime";
 import Link from "next/link";
 
 export default async function PostsList() {
-  const data = await getPosts();
+  const data = await getStaticPosts();
 
   return data ? (
     <ul className="flex flex-col gap-14">

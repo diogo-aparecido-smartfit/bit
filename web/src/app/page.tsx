@@ -3,7 +3,7 @@ import Subscribe from "./components/Subscribe";
 import Tip from "./components/Tip";
 
 export interface Post {
-  id: string | number;
+  id?: number;
   title: string;
   slug: string;
   body: string;

@@ -3,13 +3,14 @@
 import Link from "next/link";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import React from "react";
+import React, { useState } from "react";
 import { authenticate } from "../services/auth";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Login() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { push } = useRouter();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -21,6 +22,8 @@ export default function Login() {
     };
 
     try {
+      setIsLoading(true);
+
       await authenticate(payload.username, payload.password);
       const result = await authenticate(
         payload.username,
@@ -28,8 +31,12 @@ export default function Login() {
       ).catch();
 
       if (result === true) {
+        setIsLoading(false);
+
         return push("/dashboard");
       } else {
+        setIsLoading(false);
+
         toast.error(`Invalid username or password.`, {
           duration: 4000,
           position: "top-center",
@@ -58,7 +65,7 @@ export default function Login() {
           type="password"
           required
         />
-        <Button className="mt-10" type="submit">
+        <Button isLoading={isLoading} className="mt-10" type="submit">
           Login
         </Button>
         <Link

@@ -1,11 +1,6 @@
 "use server";
 
-import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
-import { redirect } from "next/navigation";
-import { error } from "console";
-import { ok } from "assert";
 
 const apiUrl = process.env.API_URL || "";
 
@@ -29,7 +24,7 @@ export async function authenticate(Username: string, Password: string) {
     const data = await response.json();
 
     if (!response.ok) {
-      console.log(`Erro: ${data.message}`);
+      console.log(`Error: ${data.message}`);
 
       return {
         error: {
@@ -38,8 +33,6 @@ export async function authenticate(Username: string, Password: string) {
         },
       };
     }
-
-    console.log(data);
 
     cookies().set({
       name: "jwt",
@@ -59,34 +52,6 @@ export async function authenticate(Username: string, Password: string) {
         message: `Falha na autenticação: (${error.message})`,
       };
     }
-  }
-}
-
-export async function isAuthenticated() {
-  try {
-    const token = cookies().get("jwt")?.value;
-
-    if (!token) {
-      return {
-        error: {
-          message: "Unauthorized",
-          status: 401,
-        },
-      };
-    }
-
-    const secret = process.env.SECRET_KEY || "";
-
-    jwt.verify(token, secret);
-    return true;
-  } catch (error: unknown) {
-    console.log(`Error: ${error}`);
-    return {
-      error: {
-        message: "Unauthorized",
-        status: 401,
-      },
-    };
   }
 }
 
