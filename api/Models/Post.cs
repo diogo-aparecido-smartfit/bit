@@ -12,7 +12,7 @@ namespace Models
     public required string Title { get; set; }
 
     [Column("slug")]
-    public required string Slug { get; set; } = "default-slug";
+    public required string Slug { get; set; }
 
     [Column("body")]
     public required string Body { get; set; }

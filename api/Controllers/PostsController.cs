@@ -50,7 +50,7 @@ public class PostsController : ControllerBase
     _context.Posts.Add(post);
     await _context.SaveChangesAsync();
 
-    return CreatedAtAction(nameof(GetPost), new { id = post.Id }, post);
+    return CreatedAtAction(nameof(GetPost), new { slug = post.Slug }, post);
   }
 
   // PUT: /posts/5
